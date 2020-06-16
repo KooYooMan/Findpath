@@ -1,0 +1,18 @@
+#game {
+    max-height: 100vh;
+    .wrap {
+        margin: 0 auto;
+        margin-top: 40px;
+        width: 560px;
+    }
+    .square {
+        float: left;
+    }
+    .buttons {
+        position: absolute;
+        right: 50px;
+    }
+    button {
+        margin: 10px;
+    }
+}
