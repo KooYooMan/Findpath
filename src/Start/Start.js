@@ -5,6 +5,7 @@ import Play from './Play';
 import Author from './Author';
 import Tutorial from './Tutorial';
 import History from './History';
+import startSound from '../Resources/Sound/Start.mp3';
 
 class Logo extends React.Component {
     render() {
@@ -55,10 +56,19 @@ class Start extends React.Component {
         this.changeScreen = this.changeScreen.bind(this);
     }
 
+    startSound = new Audio(startSound);
+
     componentDidMount() {
         this.setState({
             screen: 0,
         });
+        this.startSound.loop = true;
+        this.startSound.play().then(() => {}).catch(() => this.startSound.play());
+    }
+
+    componentWillUnmount() {
+        this.startSound.pause();
+        this.startSound.currentTime = 0;
     }
 
     changeScreen(newScreen) {
