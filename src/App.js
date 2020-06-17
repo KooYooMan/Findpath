@@ -37,16 +37,16 @@ class App extends React.Component {
     switch (this.state.stage) {
       case 0:
         return (
-          <Start 
-            changeStage={this.changeStage} 
-            maxPoint = {this.state.maxPoint}
+          <Start
+            changeStage={this.changeStage}
+            maxPoint={this.state.maxPoint}
           />
         )
       case 1:
-        return( 
-          <Game 
-            changeStage={this.changeStage} 
-            updateMaxPoint = {this.updateMaxPoint}
+        return (
+          <Game
+            changeStage={this.changeStage}
+            updateMaxPoint={this.updateMaxPoint}
           />
         )
       default:

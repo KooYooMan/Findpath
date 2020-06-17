@@ -1,7 +1,10 @@
 import React from 'react';
 import './Game.scss';
 import carrot from './carrot.jpg';
-import bunny from './bunny.jpg';
+import Up from './up.gif';
+import Down from './down.gif';
+import Left from './left.gif';
+import Right from './right.gif';
 
 class Wrap extends React.Component {
     process(value) {
@@ -36,28 +39,55 @@ class Wrap extends React.Component {
                     this.props.updatePoint(100);
                     if (passed === 19) {
                         document.querySelectorAll('button').forEach(value => value.disabled = true);
-                        for (let i = 0; i < this.props.clicked.length; ++i) {
-                            const pos = this.props.clicked[i];
-                            const column = pos % 8;
-                            const row = (pos - column) / 8;
+                        const listCell = this.props.clicked.map(value => ({
+                            left: (value % 8) * 70 + 420,
+                            top: 50 + ((value - (value % 8)) / 8) * 70
+                        }));
+                        listCell.push({
+                            left: 965,
+                            top: 250
+                        });
+                        let count = 0, prevLeft = 330, prevTop = 530;
+                        listCell.forEach(({left, top}) => {
+                            count ++;
                             setTimeout(() => {
                                 var rabbit = document.getElementById("rabbit");
-                                rabbit.style.left = `${400 + column * 70}px`;
-                                rabbit.style.top = `${40 + row * 70}px`;
-                            }, (i + 1) * 1000);
-                        }
-                        setTimeout(() => {
-                            var rabbit = document.getElementById("rabbit");
-                            rabbit.style.left = `965px`;
-                            rabbit.style.top = `250px`;
-                        }, 21000);
+                                if (left < prevLeft) {
+                                    rabbit.src = Left;
+                                    rabbit.style.width = '50px';
+                                    rabbit.style.left = `${left}px`;
+                                    rabbit.style.top = `${top}px`;
+                                }
+                                else if (left > prevLeft) {
+                                    rabbit.src = Right;
+                                    rabbit.style.width = '50px';
+                                    rabbit.style.left = `${left}px`;
+                                    rabbit.style.top = `${top}px`;
+                                }
+                                else if (top < prevTop) {
+                                    rabbit.src = Up;
+                                    rabbit.style.width = '27px';
+                                    rabbit.style.left = `${left + 10}px`;
+                                    rabbit.style.top = `${top}px`;
+                                }
+                                else if (top > prevTop) {
+                                    rabbit.src = Down;
+                                    rabbit.style.width = '27px';
+                                    rabbit.style.left = `${left + 10}px`;
+                                    rabbit.style.top = `${top}px`;
+                                }
+                                
+                                prevLeft = left;
+                                prevTop = top;
+                            }, count * 1000);
+                        });
                         setTimeout(() => {
                             this.props.changeScreen(1);
-                        }, 22000);
+                        }, 23000);
                         setTimeout(() => {
                             this.props.changeScreen(2);
                             this.props.updateMaxPoint();
-                        }, 23000);
+                        }, 26000);
                     }
                     return;
                 }
@@ -96,17 +126,15 @@ class Wrap extends React.Component {
             <div className="wrap">
                 <img
                     alt=""
-                    src={bunny}
+                    src={Right}
                     id="rabbit"
                     style={{
-                        width: '70px',
-                        height: '70px',
                         position: 'absolute',
-                        top: '530px',
-                        left: '331px',
-                        transitionProperty: 'top left',
-                        transitionDuration: '1s',
-                        transitionTimingFunction: 'linear'
+                        width: '50px',
+                        height: '50px',
+                        top: '540px',
+                        left: '350px',
+                        transition: 'left 1s linear, top 1s linear, scale 0s',
                     }}
                 />
                 <img

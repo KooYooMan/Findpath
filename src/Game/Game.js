@@ -1,10 +1,10 @@
 import React from 'react';
 import './Game.scss';
 import data from './Map';
-import finished from './finished.png';
 import Ending from '../Ending/Ending';
 import Wrap from './Wrap';
 import Point from './Point';
+import tenor from './tenor.gif';
 
 class Game extends React.Component {
     constructor(props) {
@@ -120,25 +120,33 @@ class Game extends React.Component {
                 );
             case 1:
                 return (
-                    <img 
-                        src={finished} 
-                        alt="" 
-                        style = {{
+                    <div
+                        style={{
                             height: '100vh',
                             width: '100vw',
-                            backgroundPosition: 'center',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundSize: 'cover',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
                         }}
-                    />
+                    >
+                        <img
+                            src={tenor}
+                            alt=""
+                            style={{
+                                backgroundPosition: 'center',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundSize: 'cover'
+                            }}
+                        />
+                    </div>
                 );
             case 2:
                 return (
-                    <Ending 
-                        changeStage = {this.props.changeStage}
-                        changeScreen = {this.changeScreen}
-                        point = {this.state.point}
-                        reset = {this.reset}
+                    <Ending
+                        changeStage={this.props.changeStage}
+                        changeScreen={this.changeScreen}
+                        point={this.state.point}
+                        reset={this.reset}
                     />
                 );
             default:
