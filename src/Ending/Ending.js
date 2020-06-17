@@ -1,8 +1,20 @@
 import React from 'react';
 import './Ending.scss';
 import { Spring } from 'react-spring/renderprops';
+import GameOver from '../Resources/Sound/GameOver.mp3';
 
 class Ending extends React.Component {
+    gameOver = new Audio(GameOver);
+
+    componentDidMount() {
+        this.gameOver.play();
+    }
+
+    componentWillUnmount() {
+        this.gameOver.pause();
+        this.gameOver.currentTime = 0;
+    }
+
     render() {
         return (
             <Spring

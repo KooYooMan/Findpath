@@ -1,10 +1,10 @@
 import React from 'react';
 import './Game.scss';
-import data from './Map';
+import data from '../Resources/Map/Map';
 import Ending from '../Ending/Ending';
 import Wrap from './Wrap';
 import Point from './Point';
-import tenor from './tenor.gif';
+import Carrot from './Carrot';
 
 class Game extends React.Component {
     constructor(props) {
@@ -120,25 +120,7 @@ class Game extends React.Component {
                 );
             case 1:
                 return (
-                    <div
-                        style={{
-                            height: '100vh',
-                            width: '100vw',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}
-                    >
-                        <img
-                            src={tenor}
-                            alt=""
-                            style={{
-                                backgroundPosition: 'center',
-                                backgroundRepeat: 'no-repeat',
-                                backgroundSize: 'cover'
-                            }}
-                        />
-                    </div>
+                    <Carrot />
                 );
             case 2:
                 return (

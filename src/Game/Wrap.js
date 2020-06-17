@@ -1,22 +1,40 @@
 import React from 'react';
 import './Game.scss';
-import carrot from './carrot.jpg';
-import Up from './up.gif';
-import Down from './down.gif';
-import Left from './left.gif';
-import Right from './right.gif';
+import carrot from '../Resources/Image/carrot.jpg';
+import Up from '../Resources/Image/up.gif';
+import Down from '../Resources/Image/down.gif';
+import Left from '../Resources/Image/left.gif';
+import Right from '../Resources/Image/right.gif';
+import Correct from '../Resources/Sound/Correct.mp3';
+import Wrong from '../Resources/Sound/Wrong.mp3';
+import gameMusic from '../Resources/Sound/gameMusic.mp3';
 
 class Wrap extends React.Component {
+    gameMusic = new Audio(gameMusic);
+
+    componentDidMount() {
+        this.gameMusic.loop = true;
+        this.gameMusic.volume = 0.3;
+        this.gameMusic.play();
+    }
+
+    componentWillUnmount() {
+        this.gameMusic.pause();
+        this.gameMusic.currentTime = 0;
+    }
+ 
     process(value) {
         return () => {
             if (this.props.clicked.length === 0) {
                 if (document.querySelector(`#cell-${value}`).innerHTML === "1") {
                     this.props.addClicked(value);
                     this.props.updatePoint(100);
+                    new Audio(Correct).play();
                     return;
                 }
                 else {
                     this.props.updatePoint(-50);
+                    new Audio(Wrong).play();
                     document.querySelector(`#cell-${value}`).style.backgroundColor = "red";
                     setTimeout(() => {
                         document.querySelector(`#cell-${value}`).style.backgroundColor = "";
@@ -37,6 +55,7 @@ class Wrap extends React.Component {
                     && foo === bar + 1) {
                     this.props.addClicked(value);
                     this.props.updatePoint(100);
+                    new Audio(Correct).play();
                     if (passed === 19) {
                         document.querySelectorAll('button').forEach(value => value.disabled = true);
                         const listCell = this.props.clicked.map(value => ({
@@ -92,6 +111,7 @@ class Wrap extends React.Component {
                     return;
                 }
                 this.props.updatePoint(-50);
+                new Audio(Wrong).play();
                 document.querySelector(`#cell-${value}`).style.backgroundColor = "red";
                 setTimeout(() => {
                     document.querySelector(`#cell-${value}`).style.backgroundColor = "";
