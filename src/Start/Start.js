@@ -2,7 +2,7 @@ import React from 'react';
 import './Start.scss';
 import Path from './Path';
 import Play from './Play';
-import Author from './Author';
+import Alter from './Alter';
 import Tutorial from './Tutorial';
 import History from './History';
 import startSound from '../Resources/Sound/Start.mp3';
@@ -19,8 +19,9 @@ class Logo extends React.Component {
                 );
             case 2:
                 return (
-                    <Author
+                    <Alter
                         changeScreen={this.props.changeScreen}
+                        updateData={this.props.updateData}
                     />
                 );
             case 3:
@@ -87,6 +88,7 @@ class Start extends React.Component {
                     changeScreen={this.changeScreen}
                     changeStage={this.props.changeStage}
                     maxPoint={this.props.maxPoint}
+                    updateData={this.props.updateData}
                 />
             </div>
         );

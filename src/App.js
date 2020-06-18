@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Start from './Start/Start';
 import Game from './Game/Game';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -9,15 +10,32 @@ class App extends React.Component {
     this.state = {
       stage: 0,
       maxPoint: 0,
+      data: []
     };
     this.changeStage = this.changeStage.bind(this);
     this.updateMaxPoint = this.updateMaxPoint.bind(this);
+    this.updateData = this.updateData.bind(this);
   }
 
   componentDidMount() {
+    axios.get('http://uet-schedule.herokuapp.com/path')
+    .then((result) => {
+      this.setState({
+        stage: 0,
+        data: result.data.exam,
+      });
+    })
+    .catch(() => {
+      this.setState({
+        stage: 3,
+      })
+    })
+  }
+
+  updateData(data) {
     this.setState({
-      stage: 0
-    });
+      data: data,
+    })
   }
 
   changeStage(newStage) {
@@ -40,6 +58,7 @@ class App extends React.Component {
           <Start
             changeStage={this.changeStage}
             maxPoint={this.state.maxPoint}
+            updateData={this.updateData}
           />
         )
       case 1:
@@ -47,6 +66,7 @@ class App extends React.Component {
           <Game
             changeStage={this.changeStage}
             updateMaxPoint={this.updateMaxPoint}
+            data={this.state.data}
           />
         )
       default:
