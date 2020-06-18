@@ -2,8 +2,14 @@ import React from 'react';
 import './Alter.scss';
 import mapChecking from '../Resources/Map/mapChecking';
 import { Spring } from 'react-spring/renderprops';
+import axios from 'axios';
 
 class Edit extends React.Component {
+    constructor(props) {
+        super(props);
+        this.updateMap = this.updateMap.bind(this);
+    }
+
     componentDidMount() {
         document.getElementById('cell-0').focus();
     }
@@ -13,8 +19,19 @@ class Edit extends React.Component {
         for (let i = 0; i < 64; ++ i) {
             list.push(parseInt(document.getElementById(`cell-${i}`).value));
         }
-        console.log(list);
-        alert(mapChecking(list));
+        const result = mapChecking(list);
+        if (result === true) {
+            axios.post('http://uet-schedule.herokuapp.com/path', {
+                exam: list,
+            })
+            .then(() => {
+                alert('Update map successful');
+                this.props.updateData(list);
+                this.props.changeScreen(0);
+            })
+            .catch(() => {});
+        }
+        else alert(result);
     }
 
     render() {
@@ -63,7 +80,6 @@ class Edit extends React.Component {
                         }}
                         onClick={() => {
                             this.props.changeScreen(0);
-                            console.log('hello');
                         }}
                     >Back</button><br />
                 </div>
@@ -134,7 +150,7 @@ class Alter extends React.Component {
                                             style={{ width: '100%', fontSize: '50px' }}
                                             onClick={() => this.changeScreen(1)}
                                         >
-                                            Alternative Map
+                                            Alter Map
                                 </a>
                                         <a
                                             href="/#" onClick={() => this.props.changeScreen(0)}
@@ -153,6 +169,7 @@ class Alter extends React.Component {
         return (
             <Edit
                 changeScreen={this.changeScreen}
+                updateData={this.props.updateData}
             />
         );
     }

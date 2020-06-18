@@ -21,6 +21,7 @@ class Logo extends React.Component {
                 return (
                     <Alter
                         changeScreen={this.props.changeScreen}
+                        updateData={this.props.updateData}
                     />
                 );
             case 3:
@@ -87,6 +88,7 @@ class Start extends React.Component {
                     changeScreen={this.changeScreen}
                     changeStage={this.props.changeStage}
                     maxPoint={this.props.maxPoint}
+                    updateData={this.props.updateData}
                 />
             </div>
         );
