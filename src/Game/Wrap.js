@@ -10,9 +10,37 @@ import Wrong from '../Resources/Sound/Wrong.mp3';
 import gameMusic from '../Resources/Sound/gameMusic.mp3';
 
 class Wrap extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            list: [],
+            rowRabbit: 0,
+            rowCarrot: 0,
+        };
+    }
+
     gameMusic = new Audio(gameMusic);
 
+    detectRowRabbit(data) {
+        for (let i = 0; i < 64; i += 8) {
+            if (data[i] === 1) return i / 8;
+        }
+    }
+
+    detectRowCarrot(data) {
+        for (let i = 0; i < 64; i += 8) {
+            if (data[i + 7] === 20) return i / 8;
+        }
+    }
+
     componentDidMount() {
+        const rowRabbit = this.detectRowRabbit(this.props.data);
+        const rowCarrot = this.detectRowCarrot(this.props.data);
+        this.setState({
+            list: this.props.data,
+            rowRabbit: rowRabbit,
+            rowCarrot: rowCarrot,
+        });
         this.gameMusic.loop = true;
         this.gameMusic.volume = 0.3;
         this.gameMusic.play();
@@ -59,45 +87,44 @@ class Wrap extends React.Component {
                     if (passed === 19) {
                         document.querySelectorAll('button').forEach(value => value.disabled = true);
                         const listCell = this.props.clicked.map(value => ({
-                            left: (value % 8) * 70 + 420,
-                            top: 50 + ((value - (value % 8)) / 8) * 70
+                            column: value % 8,
+                            row: (value - (value % 8)) / 8,
                         }));
                         listCell.push({
-                            left: 965,
-                            top: 250
+                            column: 8,
+                            row: this.rowCarrot
                         });
-                        let count = 0, prevLeft = 330, prevTop = 530;
-                        listCell.forEach(({left, top}) => {
+                        let count = 0, prevRow = this.rowRabbit, prevColumn = -1;
+                        listCell.forEach(({column, row}) => {
                             count ++;
                             setTimeout(() => {
                                 var rabbit = document.getElementById("rabbit");
-                                if (left < prevLeft) {
+                                if (column < prevColumn) {
                                     rabbit.src = Left;
                                     rabbit.style.width = '50px';
-                                    rabbit.style.left = `${left}px`;
-                                    rabbit.style.top = `${top}px`;
+                                    rabbit.style.top = `${-560 + row * 70}px`;
+                                    rabbit.style.left = `${column * 70 - 49}px`;
                                 }
-                                else if (left > prevLeft) {
+                                else if (column > prevColumn) {
                                     rabbit.src = Right;
                                     rabbit.style.width = '50px';
-                                    rabbit.style.left = `${left}px`;
-                                    rabbit.style.top = `${top}px`;
+                                    rabbit.style.top = `${-560 + row * 70}px`;
+                                    rabbit.style.left = `${column * 70 - 49}px`;
                                 }
-                                else if (top < prevTop) {
+                                else if (row < prevRow) {
                                     rabbit.src = Up;
                                     rabbit.style.width = '27px';
-                                    rabbit.style.left = `${left + 10}px`;
-                                    rabbit.style.top = `${top}px`;
+                                    rabbit.style.top = `${-560 + row * 70 + 10}px`;
+                                    rabbit.style.left = `${column * 70 - 49}px`;
                                 }
-                                else if (top > prevTop) {
+                                else if (row > prevRow) {
                                     rabbit.src = Down;
                                     rabbit.style.width = '27px';
-                                    rabbit.style.left = `${left + 10}px`;
-                                    rabbit.style.top = `${top}px`;
+                                    rabbit.style.top = `${-560 + row * 70 + 10}px`;
+                                    rabbit.style.left = `${column * 70 - 49}px`;
                                 }
-                                
-                                prevLeft = left;
-                                prevTop = top;
+                                prevRow = row;
+                                prevColumn = column;
                             }, count * 1000);
                         });
                         setTimeout(() => {
@@ -122,7 +149,7 @@ class Wrap extends React.Component {
 
     render() {
         var count = -1;
-        const data = this.props.list.map(value => {
+        const data = this.state.list.map(value => {
             count++;
             return (
                 <button
@@ -144,19 +171,7 @@ class Wrap extends React.Component {
         })
         return (
             <div className="wrap">
-                <img
-                    alt=""
-                    src={Right}
-                    id="rabbit"
-                    style={{
-                        position: 'absolute',
-                        width: '50px',
-                        height: '50px',
-                        top: '540px',
-                        left: '350px',
-                        transition: 'left 1s linear, top 1s linear, scale 0s',
-                    }}
-                />
+                {data}
                 <img
                     alt=""
                     src={carrot}
@@ -164,15 +179,27 @@ class Wrap extends React.Component {
                     style={{
                         width: '70px',
                         height: '70px',
-                        position: 'absolute',
-                        top: '250px',
-                        left: '965px',
+                        position: 'relative',
+                        top: `${-560 + this.state.rowCarrot * 70}px`,
+                        left: '560px',
                         transitionProperty: 'top left',
                         transitionDuration: '1s',
                         transitionTimingFunction: 'linear'
                     }}
                 />
-                {data}
+                <img
+                    alt=""
+                    src={Right}
+                    id="rabbit"
+                    style={{
+                        position: 'relative',
+                        width: '50px',
+                        height: '50px',
+                        top: `${-560 + this.state.rowRabbit * 70}px`,
+                        left: `-119px`,
+                        transition: 'left 1s linear, top 1s linear, scale 0s',
+                    }}
+                />
             </div>
         );
     }

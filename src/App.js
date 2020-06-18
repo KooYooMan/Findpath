@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Start from './Start/Start';
 import Game from './Game/Game';
+import data from './Resources/Map/Map';
 
 class App extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class App extends React.Component {
     this.state = {
       stage: 0,
       maxPoint: 0,
+      data: []
     };
     this.changeStage = this.changeStage.bind(this);
     this.updateMaxPoint = this.updateMaxPoint.bind(this);
@@ -16,7 +18,8 @@ class App extends React.Component {
 
   componentDidMount() {
     this.setState({
-      stage: 0
+      stage: 0,
+      data: data,
     });
   }
 
@@ -47,6 +50,7 @@ class App extends React.Component {
           <Game
             changeStage={this.changeStage}
             updateMaxPoint={this.updateMaxPoint}
+            data={this.state.data}
           />
         )
       default:
