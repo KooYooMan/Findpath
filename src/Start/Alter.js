@@ -21,7 +21,7 @@ class Edit extends React.Component {
         }
         const result = mapChecking(list);
         if (result === true) {
-            axios.post('http://uet-schedule.herokuapp.com/path', {
+            axios.post('http://secustom.herokuapp.com/path', {
                 exam: list,
             })
             .then(() => {

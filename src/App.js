@@ -18,7 +18,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://uet-schedule.herokuapp.com/path')
+    axios.get('http://secustom.herokuapp.com/path')
     .then((result) => {
       this.setState({
         stage: 0,
@@ -29,7 +29,7 @@ class App extends React.Component {
       this.setState({
         stage: 3,
       })
-    })
+    });
   }
 
   updateData(data) {
