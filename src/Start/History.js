@@ -42,7 +42,7 @@ class History extends React.Component {
                                             Điểm cao nhất: {this.props.maxPoint}
                                         </div>
                                     </div>
-                                    <a href="/" onClick={() => this.props.changeScreen(0)}>Back</a>
+                                    <a onClick={() => this.props.changeScreen(0)}>Back</a>
                                 </div>
                             </div>
                         </div>
