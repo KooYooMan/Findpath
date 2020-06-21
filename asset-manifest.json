@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/findpath/static/css/main.ec0a761c.chunk.css",
+    "main.js": "/findpath/static/js/main.1ec499da.chunk.js",
+    "main.js.map": "/findpath/static/js/main.1ec499da.chunk.js.map",
+    "runtime-main.js": "/findpath/static/js/runtime-main.746263c0.js",
+    "runtime-main.js.map": "/findpath/static/js/runtime-main.746263c0.js.map",
+    "static/js/2.c04d9cf2.chunk.js": "/findpath/static/js/2.c04d9cf2.chunk.js",
+    "static/js/2.c04d9cf2.chunk.js.map": "/findpath/static/js/2.c04d9cf2.chunk.js.map",
+    "index.html": "/findpath/index.html",
+    "precache-manifest.092bd079a5ff4974442bef09cbdbeb7b.js": "/findpath/precache-manifest.092bd079a5ff4974442bef09cbdbeb7b.js",
+    "service-worker.js": "/findpath/service-worker.js",
+    "static/css/main.ec0a761c.chunk.css.map": "/findpath/static/css/main.ec0a761c.chunk.css.map",
+    "static/js/2.c04d9cf2.chunk.js.LICENSE.txt": "/findpath/static/js/2.c04d9cf2.chunk.js.LICENSE.txt",
+    "static/media/Correct.mp3": "/findpath/static/media/Correct.753af0ca.mp3",
+    "static/media/GameOver.mp3": "/findpath/static/media/GameOver.e59188c1.mp3",
+    "static/media/Start.mp3": "/findpath/static/media/Start.85b128e3.mp3",
+    "static/media/Wrong.mp3": "/findpath/static/media/Wrong.16ca1dfe.mp3",
+    "static/media/carrot.jpg": "/findpath/static/media/carrot.2de71b50.jpg",
+    "static/media/eatingCarrot.mp3": "/findpath/static/media/eatingCarrot.18971238.mp3",
+    "static/media/gameMusic.mp3": "/findpath/static/media/gameMusic.68735110.mp3",
+    "static/media/tenor.gif": "/findpath/static/media/tenor.0e317adf.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.746263c0.js",
+    "static/js/2.c04d9cf2.chunk.js",
+    "static/css/main.ec0a761c.chunk.css",
+    "static/js/main.1ec499da.chunk.js"
+  ]
+}
