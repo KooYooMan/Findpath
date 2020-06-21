@@ -18,7 +18,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://secustom.herokuapp.com/path')
+    axios.get('https://secustom.herokuapp.com/path')
     .then((result) => {
       this.setState({
         stage: 0,

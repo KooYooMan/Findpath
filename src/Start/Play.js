@@ -34,13 +34,13 @@ class Play extends React.Component {
                                     }}
                                 >
                                     <a
-                                        href="/#" onClick={() => this.props.changeStage(1)}
+                                        onClick={() => this.props.changeStage(1)}
                                         style={{ width: '100%', fontSize: '50px' }}
                                     >
                                         Play
                                 </a>
                                     <a
-                                        href="/#" onClick={() => this.props.changeScreen(0)}
+                                        onClick={() => this.props.changeScreen(0)}
                                         style={{ width: '100%' }}
                                     >
                                         Back

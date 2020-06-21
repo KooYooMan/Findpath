@@ -63,10 +63,10 @@ class Start extends React.Component {
         this.setState({
             screen: 0,
         });
-        this.startSound.loop = true;
-        this.startSound.play()
-        .then(() => this.startSound.play())
-        .catch(() => this.startSound.play());
+        // this.startSound.loop = true;
+        // this.startSound.play()
+        // .then(() => this.startSound.play())
+        // .catch(() => this.startSound.play());
     }
 
     componentWillUnmount() {

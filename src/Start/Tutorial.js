@@ -42,7 +42,7 @@ class Tutorial extends React.Component {
                                         </div>
                                         </h5>
                                     </div>
-                                    <a href="/#" onClick={() => this.props.changeScreen(0)}>Back</a>
+                                    <a onClick={() => this.props.changeScreen(0)}>Back</a>
                                 </div>
                             </div>
                         </div>

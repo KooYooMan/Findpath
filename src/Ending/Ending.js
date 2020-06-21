@@ -31,7 +31,6 @@ class Ending extends React.Component {
                         <h1 style={{ textAlign: 'center' }}>Điểm số: {this.props.point}</h1>
                         <a
                             className="box green"
-                            href="/#"
                             onClick={() => this.props.changeStage(0)}
                             style={{
                                 display: 'flex',
@@ -43,7 +42,6 @@ class Ending extends React.Component {
                         </a>
                         <a
                             className="box green"
-                            href="/#"
                             onClick={() => {
                                 this.props.reset();
                                 this.props.changeScreen(0);

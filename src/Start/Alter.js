@@ -146,14 +146,13 @@ class Alter extends React.Component {
                                         }}
                                     >
                                         <a
-                                            href="/#"
                                             style={{ width: '100%', fontSize: '50px' }}
                                             onClick={() => this.changeScreen(1)}
                                         >
                                             Alter Map
                                 </a>
                                         <a
-                                            href="/#" onClick={() => this.props.changeScreen(0)}
+                                            onClick={() => this.props.changeScreen(0)}
                                             style={{ width: '100%' }}
                                         >
                                             Back
