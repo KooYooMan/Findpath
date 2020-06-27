@@ -95,6 +95,10 @@ class Start extends React.Component {
     render() {
         return (
             <div id="start-screen">
+                <Volume 
+                    volume={this.state.volume} 
+                    changeVolume={this.changeVolume}
+                />
                 <Logo
                     screen={this.state.screen}
                     changeScreen={this.changeScreen}
@@ -102,10 +106,7 @@ class Start extends React.Component {
                     maxPoint={this.props.maxPoint}
                     updateData={this.props.updateData}
                 />
-                <Volume 
-                    volume={this.state.volume} 
-                    changeVolume={this.changeVolume}
-                />
+                
             </div>
         );
     }
