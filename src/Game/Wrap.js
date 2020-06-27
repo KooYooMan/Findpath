@@ -34,10 +34,10 @@ class Wrap extends React.Component {
     }
 
     componentDidMount() {
-        const rowRabbit = this.detectRowRabbit(this.props.data);
-        const rowCarrot = this.detectRowCarrot(this.props.data);
+        const rowRabbit = this.detectRowRabbit(this.props.list);
+        const rowCarrot = this.detectRowCarrot(this.props.list);
         this.setState({
-            list: this.props.data,
+            list: this.props.list,
             rowRabbit: rowRabbit,
             rowCarrot: rowCarrot,
         });

@@ -26,7 +26,7 @@ class Game extends React.Component {
         this.setState({
             clicked: [],
             point: 0,
-            screen: 3,
+            screen: 0,
         });
     }
 
@@ -102,8 +102,6 @@ class Game extends React.Component {
                                     }
                                 }
                             >Back</button><br />
-                            {/* <button className="btn btn-danger Rainbow">Rainbow!</button><br />
-                            <button className="btn btn-warning Fade">Fade</button> */}
                         </div>
                         <Wrap
                             list={data}
