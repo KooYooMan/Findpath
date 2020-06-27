@@ -1,0 +1,36 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:500);
+
+$primary-color: #2ecc71;
+
+#player {
+	width: 350px;
+	height: 50px;
+	position: relative;
+	margin-right: 0;
+	top: 80px;
+	
+	i {
+		position: absolute;
+		margin-top: -6px;
+		color: #666;
+	}
+	
+	i.fa-volume-down {
+		margin-left: -8px;
+	}
+	
+	i.fa-volume-up {
+		margin-right: -8px;
+		right: 0;
+	}
+}
+
+#volume {
+	position: absolute;
+	left: 24px;
+	margin: 0 auto;
+	height: 5px;
+	width: 300px;
+	background: #555;
+	border-radius: 15px;
+}

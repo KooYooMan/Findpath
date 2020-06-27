@@ -6,6 +6,7 @@ import Alter from './Alter';
 import Tutorial from './Tutorial';
 import History from './History';
 import startSound from '../Resources/Sound/Start.mp3';
+import Volume from '../VolumeSlider/VolumeSlider';
 
 class Logo extends React.Component {
     render() {
@@ -53,8 +54,10 @@ class Start extends React.Component {
         super(props);
         this.state = {
             screen: 0,
+            volume: 0,
         };
         this.changeScreen = this.changeScreen.bind(this);
+        this.changeVolume = this.changeVolume.bind(this);
     }
 
     startSound = new Audio(startSound);
@@ -63,10 +66,19 @@ class Start extends React.Component {
         this.setState({
             screen: 0,
         });
-        // this.startSound.loop = true;
-        // this.startSound.play()
-        // .then(() => this.startSound.play())
-        // .catch(() => this.startSound.play());
+        if (this.state.volume) {
+            this.startSound.loop = true;
+            this.startSound.play();
+        }
+    }
+
+    changeVolume(value) {
+        this.startSound.pause();
+        this.startSound.volume = value / 100;
+        this.startSound.play();
+        this.setState({
+            volume: value,
+        });
     }
 
     componentWillUnmount() {
@@ -89,6 +101,10 @@ class Start extends React.Component {
                     changeStage={this.props.changeStage}
                     maxPoint={this.props.maxPoint}
                     updateData={this.props.updateData}
+                />
+                <Volume 
+                    volume={this.state.volume} 
+                    changeVolume={this.changeVolume}
                 />
             </div>
         );

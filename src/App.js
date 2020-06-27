@@ -18,6 +18,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({
+      stage: 2,
+    });
     axios.get('https://secustom.herokuapp.com/path')
     .then((result) => {
       this.setState({
@@ -69,8 +72,14 @@ class App extends React.Component {
             data={this.state.data}
           />
         )
-      default:
-        return <h1>Error!</h1>
+      case 2:
+        return (
+          <h1>Loading Game!</h1>
+        )
+      default: 
+        return (
+          <h1>Error!</h1>
+        )
     }
   }
 }
