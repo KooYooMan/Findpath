@@ -1,6 +1,6 @@
 #start-screen {
   margin: 0;
-  font: normal 0/0 Arial, Helvetica, sans-serif;
+  font: normal Arial, Helvetica, sans-serif;
   overflow: hidden;
   color: #ffffff;
   height: 100vh;
@@ -36,6 +36,7 @@
   }
   .logo {
     background-color: #333;
+    font: normal 0/0 Arial, Helvetica, sans-serif;
     width: 500px;
     height: 500px;
     position: absolute;
