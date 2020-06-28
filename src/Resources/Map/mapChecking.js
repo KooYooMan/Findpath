@@ -1,6 +1,10 @@
 const mapChecking = (data) => {
     let noOne = 0, noTwenty = 0;
 
+    if (data.length !== 64) {
+        return "Not enough 64 numbers";
+    }
+
     for (let i = 0; i < 64; ++ i) {
         if (data[i] <= 0 || data[i] > 20) {
             return "All number must be between 1 and 20";
