@@ -4,7 +4,7 @@ import './VolumeSlider.scss';
 class Volume extends React.Component {
     render() {
         return (
-            <div id="player">
+            <div id="player" style={this.props.style}>
                 <i className="fa fa-volume-down"></i>
                 <input 
                     id="volume" 

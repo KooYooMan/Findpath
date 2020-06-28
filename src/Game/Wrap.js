@@ -8,6 +8,7 @@ import Right from '../Resources/Image/right.gif';
 import Correct from '../Resources/Sound/Correct.mp3';
 import Wrong from '../Resources/Sound/Wrong.mp3';
 import gameMusic from '../Resources/Sound/gameMusic.mp3';
+import Volume from '../VolumeSlider/VolumeSlider';
 
 class Wrap extends React.Component {
     constructor(props) {
@@ -16,10 +17,21 @@ class Wrap extends React.Component {
             list: [],
             rowRabbit: 0,
             rowCarrot: 0,
+            volume: 30,
         };
+        this.changeVolume = this.changeVolume.bind(this);
     }
 
     gameMusic = new Audio(gameMusic);
+
+    changeVolume(value) {
+        this.gameMusic.pause();
+        this.gameMusic.volume = value / 100;
+        this.gameMusic.play();
+        this.setState({
+            volume: value,
+        });
+    }
 
     detectRowRabbit(data) {
         for (let i = 0; i < 64; i += 8) {
@@ -42,7 +54,6 @@ class Wrap extends React.Component {
             rowCarrot: rowCarrot,
         });
         this.gameMusic.loop = true;
-        this.gameMusic.volume = 0.3;
         this.gameMusic.play();
     }
 
@@ -50,7 +61,7 @@ class Wrap extends React.Component {
         this.gameMusic.pause();
         this.gameMusic.currentTime = 0;
     }
- 
+
     process(value) {
         return () => {
             if (this.props.clicked.length === 0) {
@@ -95,8 +106,8 @@ class Wrap extends React.Component {
                             row: this.rowCarrot
                         });
                         let count = 0, prevRow = this.rowRabbit, prevColumn = -1;
-                        listCell.forEach(({column, row}) => {
-                            count ++;
+                        listCell.forEach(({ column, row }) => {
+                            count++;
                             setTimeout(() => {
                                 var rabbit = document.getElementById("rabbit");
                                 if (column < prevColumn) {
@@ -198,6 +209,15 @@ class Wrap extends React.Component {
                         top: `${-560 + this.state.rowRabbit * 70}px`,
                         left: `-119px`,
                         transition: 'left 1s linear, top 1s linear, scale 0s',
+                    }}
+                />
+                <Volume
+                    volume={this.state.volume}
+                    changeVolume={this.changeVolume}
+                    style={{
+                        position: 'relavtive',
+                        top: '-650px',
+                        left: '-400px',
                     }}
                 />
             </div>

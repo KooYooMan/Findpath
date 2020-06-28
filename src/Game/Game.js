@@ -104,7 +104,7 @@ class Game extends React.Component {
                             >Back</button><br />
                         </div>
                         <Wrap
-                            list={data}
+                            list={this.props.data}
                             clicked={this.state.clicked}
                             addClicked={this.addClicked}
                             removeClicked={this.removeClicked}

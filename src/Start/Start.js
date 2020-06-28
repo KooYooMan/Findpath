@@ -98,6 +98,10 @@ class Start extends React.Component {
                 <Volume 
                     volume={this.state.volume} 
                     changeVolume={this.changeVolume}
+                    style={{
+                        position: 'relative',
+                        top: '30px'
+                    }}
                 />
                 <Logo
                     screen={this.state.screen}
