@@ -1,5 +1,6 @@
 import React from 'react';
 import './Game.scss';
+import data from '../Resources/Map/Map';
 import Ending from '../Ending/Ending';
 import Wrap from './Wrap';
 import Point from './Point';
@@ -101,10 +102,9 @@ class Game extends React.Component {
                                     }
                                 }
                             >Back</button><br />
-                            {/* <button className="btn btn-danger Rainbow">Rainbow!</button><br />
-                            <button className="btn btn-warning Fade">Fade</button> */}
                         </div>
                         <Wrap
+                            list={this.props.data}
                             clicked={this.state.clicked}
                             addClicked={this.addClicked}
                             removeClicked={this.removeClicked}
@@ -113,7 +113,6 @@ class Game extends React.Component {
                             updateMaxPoint={() => {
                                 this.props.updateMaxPoint(this.state.point);
                             }}
-                            data={this.props.data}
                         />
                     </div>
                 );
@@ -132,7 +131,7 @@ class Game extends React.Component {
                 );
             default:
                 return (
-                    <h1>Error!</h1>
+                    <h1>Error.....</h1>
                 );
         }
 
