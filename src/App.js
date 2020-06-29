@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import Start from './Start/Start';
-import Game from './Game/Game';
+import Start from './Component/Start/Start';
+import Game from './Component/Game/Game';
 import axios from 'axios';
 
 class App extends React.Component {
