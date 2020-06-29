@@ -100,7 +100,8 @@ class Start extends React.Component {
                     changeVolume={this.changeVolume}
                     style={{
                         position: 'relative',
-                        top: '30px'
+                        top: '30px',
+                        height: '15px'
                     }}
                 />
                 <Logo

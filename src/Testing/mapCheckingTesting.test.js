@@ -22,8 +22,6 @@ const map2 = [
     2,2,2,2,2,2,2,2
 ];
 
-const map3 = [];
-
 const map4 = [
     1,1,1,1,1,1,1,1,
     1,1,1,1,1,1,1,1,
@@ -47,10 +45,6 @@ const map5 = [
 ];
 
 describe('mapChecking', () => {
-    it ('mapChecking not-enough-array', () => {
-        expect(mapChecking(map3)).toBe("Not enough 64 numbers");
-    });
-
     it ('mapChecking correct-array-1', () => {
         expect(mapChecking(map1)).toBe(true);
     });

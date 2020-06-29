@@ -15,6 +15,15 @@ class Edit extends React.Component {
     }
 
     updateMap() {
+        let full = true;
+        for (let i = 0; i < 64; ++ i) {
+            if (document.getElementById(`cell-${i}`).value === "") {
+                full = false;
+                const number = Math.floor(Math.random() * (19 - 2 + 1)) + 2;
+                document.getElementById(`cell-${i}`).value = number.toString();
+            }
+        }
+        if (full === false) return;
         let list = [];
         for (let i = 0; i < 64; ++ i) {
             list.push(parseInt(document.getElementById(`cell-${i}`).value));
