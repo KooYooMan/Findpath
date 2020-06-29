@@ -55,7 +55,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.data);
     switch (this.state.stage) {
       case 0:
         return (
