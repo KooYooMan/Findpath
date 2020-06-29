@@ -22,17 +22,17 @@ class App extends React.Component {
       stage: 2,
     });
     axios.get('https://secustom.herokuapp.com/path')
-    .then((result) => {
-      this.setState({
-        stage: 0,
-        data: result.data.exam,
-      });
-    })
-    .catch(() => {
-      this.setState({
-        stage: 3,
+      .then((result) => {
+        this.setState({
+          stage: 0,
+          data: result.data.exam,
+        });
       })
-    });
+      .catch(() => {
+        this.setState({
+          stage: 3,
+        })
+      });
   }
 
   updateData(data) {
@@ -75,9 +75,13 @@ class App extends React.Component {
         )
       case 2:
         return (
-          <h1>Loading Game!</h1>
+          <div>
+            <h1>Loading Game..........</h1>
+            <br></br>
+            <h1>Please Wait!</h1>
+          </div>
         )
-      default: 
+      default:
         return (
           <h1>Error!</h1>
         )
