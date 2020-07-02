@@ -99,9 +99,9 @@ class Start extends React.Component {
                     volume={this.state.volume} 
                     changeVolume={this.changeVolume}
                     style={{
-                        position: 'relative',
-                        top: '30px',
-                        height: '15px'
+                        position: 'absolute',
+                        top: '20px',
+                        height: '0px'
                     }}
                 />
                 <Logo

@@ -215,9 +215,10 @@ class Wrap extends React.Component {
                     volume={this.state.volume}
                     changeVolume={this.changeVolume}
                     style={{
-                        position: 'relavtive',
-                        top: '-650px',
-                        left: '-400px',
+                        position: 'absolute',
+                        top: '20px',
+                        left: '0px',
+                        height: '0px'
                     }}
                 />
             </div>
