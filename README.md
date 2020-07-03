@@ -32,7 +32,7 @@ Khi hoàn thành trò chơi con thỏ sẽ nhảy từ điểm bắt đầu đ�
 
 Người chơi chọn từ khóa muốn chơi.
 
-Lưu ý từ khóa không chứa dấu cách ở giữa và chỉ chứa các chứ latin và có độ dài twf **8** đến **20**.
+Lưu ý từ khóa không chứa dấu cách ở giữa và chỉ chứa các chứ latin và có độ dài từ **8** đến **20**.
 
 ![Màn hình thay đổi dữ liệu trong Game theo Letter](https://i.ibb.co/QD1Tqff/Screenshot-from-2020-07-03-20-18-28.png)
 
