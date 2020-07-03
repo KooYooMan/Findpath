@@ -24,9 +24,24 @@ Khi hoàn thành trò chơi con thỏ sẽ nhảy từ điểm bắt đầu đ�
 ![Màn hình GameOver](https://i.ibb.co/42t8nTX/Untitled.png)
 
 ### 1.3. Thay đổi dữ liệu trong game
-![Màn hình thay đổi dữ liệu trong Game](https://i.ibb.co/DMbYWRT/Untitled.png)
+![Màn hình thay đổi dữ liệu trong Game](https://i.ibb.co/R7JQp3L/Screenshot-from-2020-07-03-20-06-32.png)
 
-Người chơi nhập số vào các ô. Dữ liệu cần đảm bảo các số được điền phải nằm trong khoảng từ 1 đến 20 và **chỉ** có một số **1** ở cột đầu tiên và **chỉ** một số **20** ở cột cuối cùng (để thuận lời cho việc đặt vị trí thỏ và cà rốt). Phần mềm sẽ kiểm tra có đường đi phù hợp hay không và có một thông báo lỗi nếu bất cứ một điều kiện nào không được đảm bảo. Dữ liệu sẽ random các số từ 2 đến 19 vào các ô không được điền số khi nhấn **Confirm** khi chưa điền đầy đủ. Khi đã điền đầy đủ người chơi nhấn nút **Confirm** để xác nhận. Trong quá trình, người chơi có thể nhấn nút **Back** để quay lại.
+### 1.3.1. Thay đổi dữ liệu Letter
+
+![Màn hình chọn từ khóa](https://i.ibb.co/hcy9HCZ/Screenshot-from-2020-07-03-20-09-19.png)
+
+Người chơi chọn từ khóa muốn chơi
+Lưu ý từ khóa không chứa dấu cách ở giữa và chỉ chứa các chứ latin.
+
+![Màn hình thay đổi dữ liệu trong Game theo Letter](https://i.ibb.co/QD1Tqff/Screenshot-from-2020-07-03-20-18-28.png)
+
+Người chơi nhập các chữ cái vào các ô. Phầm mềm đã cung cấp sẵn một đường đi đúng. Bất cứ khi nào người chơi muốn xóa đi tất cả các ô thì nhấn nút **Clear**. Dữ liệu cần đảm bảo chỉ có duy nhất 1 chữ cái latin được điền vào mỗi ô và **chỉ** có một số **chữ cái đầu tiên** ở cột đầu tiên và **chỉ** một số **chữ cái cuối cùng** ở cột cuối cùng (để thuận lời cho việc đặt vị trí thỏ và cà rốt). Phần mềm sẽ kiểm tra có đường đi phù hợp hay không và có một thông báo lỗi nếu bất cứ một điều kiện nào không được đảm bảo. Dữ liệu sẽ random các chữ cái vào các ô không được điền số khi nhấn **Confirm** khi chưa điền đầy đủ. Khi đã điền đầy đủ người chơi nhấn nút **Confirm** để xác nhận. Trong quá trình, người chơi có thể nhấn nút **Back** để quay lại.
+
+### 1.3.2. Thay đổi dữ liệu Number
+
+![Màn hình thay đổi dữ liệu trong Game theo Number](https://i.ibb.co/5RnnMTH/Screenshot-from-2020-07-03-20-19-24.png)
+
+Người chơi nhập số vào các ô. Phầm mềm đã cung cấp sẵn một đường đi đúng. Bất cứ khi nào người chơi muốn xóa đi tất cả các ô thì nhấn nút **Clear**. Dữ liệu cần đảm bảo các số được điền phải nằm trong khoảng từ 1 đến 20 và **chỉ** có một số **1** ở cột đầu tiên và **chỉ** một số **20** ở cột cuối cùng (để thuận lời cho việc đặt vị trí thỏ và cà rốt). Phần mềm sẽ kiểm tra có đường đi phù hợp hay không và có một thông báo lỗi nếu bất cứ một điều kiện nào không được đảm bảo. Dữ liệu sẽ random các số từ 2 đến 19 vào các ô không được điền số khi nhấn **Confirm** khi chưa điền đầy đủ. Khi đã điền đầy đủ người chơi nhấn nút **Confirm** để xác nhận. Trong quá trình, người chơi có thể nhấn nút **Back** để quay lại.
 
 ## 2. Về mã nguồn game
 
