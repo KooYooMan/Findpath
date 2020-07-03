@@ -3,6 +3,8 @@ import './App.css';
 import Start from './Component/Start/Start';
 import Game from './Component/Game/Game';
 import axios from 'axios';
+import wordNumber from './Component/Resources/Map/wordNumber';
+import wordMap from './Component/Resources/Map/Map';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,7 +12,8 @@ class App extends React.Component {
     this.state = {
       stage: 0,
       maxPoint: 0,
-      data: []
+      data: [],
+      word: ''
     };
     this.changeStage = this.changeStage.bind(this);
     this.updateMaxPoint = this.updateMaxPoint.bind(this);
@@ -23,21 +26,27 @@ class App extends React.Component {
     });
     axios.get('https://secustom.herokuapp.com/path')
       .then((result) => {
+        alert('Retrieve data successfully');
         this.setState({
           stage: 0,
-          data: result.data.exam,
+          data: result.data.exam[0].table,
+          word: result.data.exam[0].word
         });
       })
       .catch(() => {
+        alert('Retrieve data failed. We create a auto map for you');
         this.setState({
-          stage: 3,
+          stage: 0,
+          data: wordMap,
+          word: wordNumber
         })
       });
   }
 
-  updateData(data) {
+  updateData(data, word) {
     this.setState({
       data: data,
+      word: word,
     })
   }
 
@@ -70,6 +79,7 @@ class App extends React.Component {
             changeStage={this.changeStage}
             updateMaxPoint={this.updateMaxPoint}
             data={this.state.data}
+            word={this.state.word}
           />
         )
       case 2:

@@ -4,6 +4,23 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type=number] {
-    -moz-appearance: textfield;
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+#dot {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  .dot {
+    margin-top: 50px;
+    height: 500px;
+    width: 500px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+}

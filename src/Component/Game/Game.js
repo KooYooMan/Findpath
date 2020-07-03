@@ -1,6 +1,5 @@
 import React from 'react';
 import './Game.scss';
-import data from '../Resources/Map/Map';
 import Ending from '../Ending/Ending';
 import Wrap from './Wrap';
 import Point from './Point';
@@ -105,6 +104,7 @@ class Game extends React.Component {
                         </div>
                         <Wrap
                             list={this.props.data}
+                            word={this.props.word}
                             clicked={this.state.clicked}
                             addClicked={this.addClicked}
                             removeClicked={this.removeClicked}

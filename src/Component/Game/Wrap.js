@@ -20,6 +20,8 @@ class Wrap extends React.Component {
             volume: 30,
         };
         this.changeVolume = this.changeVolume.bind(this);
+        this.detectRowCarrot = this.detectRowCarrot.bind(this);
+        this.detectRowRabbit = this.detectRowRabbit.bind(this);
     }
 
     gameMusic = new Audio(gameMusic);
@@ -35,19 +37,20 @@ class Wrap extends React.Component {
 
     detectRowRabbit(data) {
         for (let i = 0; i < 64; i += 8) {
-            if (data[i] === 1) return i / 8;
+            if (data[i] === this.props.word[0]) return i / 8;
         }
     }
 
     detectRowCarrot(data) {
         for (let i = 0; i < 64; i += 8) {
-            if (data[i + 7] === 20) return i / 8;
+            if (data[i + 7] === this.props.word[this.props.word.length - 1]) return i / 8;
         }
     }
 
     componentDidMount() {
         const rowRabbit = this.detectRowRabbit(this.props.list);
         const rowCarrot = this.detectRowCarrot(this.props.list);
+        console.log(rowRabbit, rowCarrot);
         this.setState({
             list: this.props.list,
             rowRabbit: rowRabbit,
@@ -65,7 +68,7 @@ class Wrap extends React.Component {
     process(value) {
         return () => {
             if (this.props.clicked.length === 0) {
-                if (document.querySelector(`#cell-${value}`).innerHTML === "1") {
+                if (document.querySelector(`#cell-${value}`).innerHTML === this.props.word[0]) {
                     this.props.addClicked(value);
                     this.props.updatePoint(100);
                     new Audio(Correct).play();
@@ -82,20 +85,20 @@ class Wrap extends React.Component {
             }
             else {
                 const passed = this.props.clicked.length;
-                const prev = this.props.clicked[this.props.clicked.length - 1];
+                const prev = this.props.clicked[passed - 1];
                 const prevColumn = prev % 8;
                 const prevRow = (prev - prevColumn) / 8;
                 const valueColumn = value % 8;
                 const valueRow = (value - valueColumn) / 8;
-                const foo = parseInt(document.querySelector(`#cell-${value}`).innerHTML);
-                const bar = parseInt(document.querySelector(`#cell-${prev}`).innerHTML);
+                const foo = document.querySelector(`#cell-${value}`).innerHTML;
                 if (Math.abs(prevColumn - valueColumn) + Math.abs(valueRow - prevRow) === 0) return;
+                if (this.props.clicked.includes(value)) return;
                 if (Math.abs(prevColumn - valueColumn) + Math.abs(valueRow - prevRow) === 1
-                    && foo === bar + 1) {
+                    && foo === this.props.word[this.props.clicked.length]) {
                     this.props.addClicked(value);
                     this.props.updatePoint(100);
                     new Audio(Correct).play();
-                    if (passed === 19) {
+                    if (passed === this.props.word.length - 1) {
                         document.querySelectorAll('button').forEach(value => value.disabled = true);
                         const listCell = this.props.clicked.map(value => ({
                             column: value % 8,
@@ -112,27 +115,27 @@ class Wrap extends React.Component {
                                 var rabbit = document.getElementById("rabbit");
                                 if (column < prevColumn) {
                                     rabbit.src = Left;
-                                    rabbit.style.width = '50px';
-                                    rabbit.style.top = `${-560 + row * 70}px`;
-                                    rabbit.style.left = `${column * 70 - 49}px`;
+                                    rabbit.style.width = '42px';
+                                    rabbit.style.top = `${-520 + row * 65}px`;
+                                    rabbit.style.left = `${column * 65 - 49}px`;
                                 }
                                 else if (column > prevColumn) {
                                     rabbit.src = Right;
-                                    rabbit.style.width = '50px';
-                                    rabbit.style.top = `${-560 + row * 70}px`;
-                                    rabbit.style.left = `${column * 70 - 49}px`;
+                                    rabbit.style.width = '42px';
+                                    rabbit.style.top = `${-520 + row * 65}px`;
+                                    rabbit.style.left = `${column * 65 - 49}px`;
                                 }
                                 else if (row < prevRow) {
                                     rabbit.src = Up;
-                                    rabbit.style.width = '27px';
-                                    rabbit.style.top = `${-560 + row * 70 + 10}px`;
-                                    rabbit.style.left = `${column * 70 - 49}px`;
+                                    rabbit.style.width = '25px';
+                                    rabbit.style.top = `${-520 + row * 65 + 10}px`;
+                                    rabbit.style.left = `${column * 65 - 49}px`;
                                 }
                                 else if (row > prevRow) {
                                     rabbit.src = Down;
-                                    rabbit.style.width = '27px';
-                                    rabbit.style.top = `${-560 + row * 70 + 10}px`;
-                                    rabbit.style.left = `${column * 70 - 49}px`;
+                                    rabbit.style.width = '25px';
+                                    rabbit.style.top = `${-520 + row * 65 + 10}px`;
+                                    rabbit.style.left = `${column * 65 - 49}px`;
                                 }
                                 prevRow = row;
                                 prevColumn = column;
@@ -140,11 +143,11 @@ class Wrap extends React.Component {
                         });
                         setTimeout(() => {
                             this.props.changeScreen(1);
-                        }, 23000);
+                        }, (this.props.word.length + 2) * 1000);
                         setTimeout(() => {
                             this.props.changeScreen(2);
                             this.props.updateMaxPoint();
-                        }, 26000);
+                        }, (this.props.word.length + 5) * 1000);
                     }
                     return;
                 }
@@ -168,8 +171,8 @@ class Wrap extends React.Component {
                     id={"cell-" + count}
                     key={count}
                     style={{
-                        height: '70px',
-                        width: '70px',
+                        height: '65px',
+                        width: '65px',
                         padding: '0',
                         margin: '0',
                         backgroundColor: (this.props.clicked.includes(count) ? '#17fc03' : ''),
@@ -182,17 +185,20 @@ class Wrap extends React.Component {
         })
         return (
             <div className="wrap">
+                <h4 style={{textAlign: 'center'}}>
+                    {(this.props.word[0] === '1' ? "Tìm đường đi từ 1 đến 20" : `Hãy nối các chữ cái tạo ra từ ${this.props.word}`)}
+                </h4>
                 {data}
                 <img
                     alt=""
                     src={carrot}
                     id="carrot"
                     style={{
-                        width: '70px',
-                        height: '70px',
+                        width: '65px',
+                        height: '65px',
                         position: 'relative',
-                        top: `${-560 + this.state.rowCarrot * 70}px`,
-                        left: '560px',
+                        top: `${-520 + this.state.rowCarrot * 65}px`,
+                        left: '520px',
                         transitionProperty: 'top left',
                         transitionDuration: '1s',
                         transitionTimingFunction: 'linear'
@@ -204,9 +210,9 @@ class Wrap extends React.Component {
                     id="rabbit"
                     style={{
                         position: 'relative',
-                        width: '50px',
-                        height: '50px',
-                        top: `${-560 + this.state.rowRabbit * 70}px`,
+                        width: '46px',
+                        height: '46px',
+                        top: `${-520 + this.state.rowRabbit * 65}px`,
                         left: `-119px`,
                         transition: 'left 1s linear, top 1s linear, scale 0s',
                     }}
