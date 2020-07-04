@@ -5,6 +5,7 @@ import Game from './Component/Game/Game';
 import axios from 'axios';
 import wordNumber from './Component/Resources/Map/wordNumber';
 import wordMap from './Component/Resources/Map/Map';
+import Loading from './Loading';
 
 class App extends React.Component {
   constructor(props) {
@@ -26,7 +27,6 @@ class App extends React.Component {
     });
     axios.get('https://secustom.herokuapp.com/path')
       .then((result) => {
-        alert('Retrieve data successfully');
         this.setState({
           stage: 0,
           data: result.data.exam[0].table,
@@ -84,11 +84,7 @@ class App extends React.Component {
         )
       case 2:
         return (
-          <div>
-            <h1>Loading Game..........</h1>
-            <br></br>
-            <h1>Please Wait!</h1>
-          </div>
+          <Loading />
         )
       default:
         return (
