@@ -63,7 +63,7 @@ class EditNumber extends React.Component {
         }
         const result = mapChecking(list, wordNumber);
         if (result === true) {
-            this.props.updateData(list, wordNumber);
+            this.props.addMap(list, wordNumber);
             this.props.changeScreen(0);
         }
         else alert(result);

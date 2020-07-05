@@ -124,15 +124,20 @@ class Delete extends React.Component {
                             height: '30px'
                         }}
                         onClick={() => {
-                            const position = parseInt(document.getElementById("wordLetter").value);
-                            if (position < 1 || position > this.props.data.length) {
-                                alert('Invalid question');
+                            if (document.getElementById("wordLetter").value === "") {
+                                alert("Please fill the section");
                                 return;
                             }
-                            this.setState({
-                                screen: 1,
-                                question: position
-                            });
+                            const position = parseInt(document.getElementById("wordLetter").value);
+                            if (position >= 1 && position <= this.props.data.length) {
+                                this.setState({
+                                    screen: 1,
+                                    question: position
+                                });
+                                return ;
+                            }
+                            alert('Invalid question');
+                            return;
                         }}
                     >Confirm</button>
                 </div>

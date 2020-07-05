@@ -64,7 +64,7 @@ class Wrap extends React.Component {
     process(value) {
         return () => {
             if (this.props.clicked.length === 0) {
-                if (document.querySelector(`#cell-${value}`).innerHTML === this.props.word[0]) {
+                if (document.querySelector(`#cell-${value}`).innerHTML === this.props.word[0] && value % 8 === 0) {
                     this.props.addClicked(value);
                     this.props.updatePoint(100);
                     new Audio(Correct).play();
@@ -94,7 +94,7 @@ class Wrap extends React.Component {
                     this.props.addClicked(value);
                     this.props.updatePoint(100);
                     new Audio(Correct).play();
-                    if (passed === this.props.word.length - 1) {
+                    if (passed === this.props.word.length - 1 && valueColumn === 7) {
                         document.querySelectorAll('button').forEach(value => {
                             value.disabled = true;
                         });
