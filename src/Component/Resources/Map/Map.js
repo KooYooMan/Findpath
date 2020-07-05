@@ -9,6 +9,22 @@ const data = [
     1, 2, 7, 3, 12, 19, 15, 16
 ];
 
-const result = data.map(value => value.toString());
+const map1 = data.map(value => value.toString());
 
-export default result;
+const foo = [
+    1, 2, 3, 4, 5, 6, 7, 8,
+    2, 15, 14, 13, 12, 11, 10, 9,
+    2, 2, 15, 16, 17, 18, 19, 20,
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2
+  ];
+  
+  const map2 = foo.map(value => value.toString());
+
+export default {
+    map1: map1,
+    map2: map2
+};

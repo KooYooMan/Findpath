@@ -3,8 +3,40 @@ import './Alter.scss';
 import { Spring } from 'react-spring/renderprops';
 import EditNumber from './EditNumber';
 import EditLetter from './EditLetter';
+import Delete from './Delete';
 
 class Option extends React.Component {
+    render() {
+        return (
+            <div id="dot">
+                <button onClick={() => {
+                    if (this.props.data.length === 0) {
+                        alert('There is no questions to delete!');
+                        return;
+                    }
+                    this.props.changeScreen(5);
+                }}>
+                    <span className="dot">
+                        <div>Delete Question</div>
+                    </span>
+                </button>
+                <button onClick={() => {
+                    if (this.props.data.length >= 3) {
+                        alert("Can't create more than 3 questions!");
+                        return;
+                    }
+                    this.props.changeScreen(4);
+                }}>
+                    <span className="dot">
+                        <div>Add Question</div>
+                    </span>
+                </button>
+            </div>
+        );
+    }
+}
+
+class Edit extends React.Component {
     render() {
         return (
             <div id="dot">
@@ -101,22 +133,37 @@ class Alter extends React.Component {
                 return (
                     <Option
                         changeScreen={this.changeScreen}
+                        data={this.props.data}
                     />
                 );
             case 2:
                 return (
                     <EditLetter
                         changeScreen={this.changeScreen}
-                        updateData={this.props.updateData}
+                        addMap={this.props.addMap}
                     />
                 );
             case 3:
                 return (
                     <EditNumber
                         changeScreen={this.changeScreen}
-                        updateData={this.props.updateData}
+                        addMap={this.props.addMap}
                     />
                 );
+            case 4:
+                return (
+                    <Edit
+                        changeScreen={this.changeScreen}
+                    />
+                )
+            case 5:
+                return (
+                    <Delete 
+                        changeScreen={this.changeScreen}
+                        deleteMap={this.props.deleteMap}
+                        data={this.props.data}
+                    />
+                )
         }
     }
 }

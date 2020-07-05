@@ -17,9 +17,9 @@ class EditNumber extends React.Component {
         let remainer = wordNumber.length - 8;
         let position = 0;
         let curRow = getRndInterger(0, 7);
-        for (let i = 0; i < 8; ++ i) {
+        for (let i = 0; i < 8; ++i) {
             document.getElementById(`cell-${curRow * 8 + i}`).value = wordNumber[position];
-            position ++;
+            position++;
             if (i === 0 || i === 7) continue;
             const low = Math.max(0, remainer - (6 - i) * 4), high = Math.min(remainer, 4);
             let step = getRndInterger(low, high);
@@ -29,19 +29,19 @@ class EditNumber extends React.Component {
                 direction = 1 - direction;
             }
             if (direction === 0) {
-                for (let j = 1; j <= step; ++ j) {
-                    curRow --;    
+                for (let j = 1; j <= step; ++j) {
+                    curRow--;
                     document.getElementById(`cell-${curRow * 8 + i}`).value = wordNumber[position];
-                    position ++;
-                    remainer --;
+                    position++;
+                    remainer--;
                 }
             }
             else {
-                for (let j = 1; j <= step; ++ j) {
-                    curRow ++;   
+                for (let j = 1; j <= step; ++j) {
+                    curRow++;
                     document.getElementById(`cell-${curRow * 8 + i}`).value = wordNumber[position];
-                    position ++;
-                    remainer --;
+                    position++;
+                    remainer--;
                 }
             }
         }
@@ -49,7 +49,7 @@ class EditNumber extends React.Component {
 
     updateMap() {
         let full = true;
-        for (let i = 0; i < 64; ++ i) {
+        for (let i = 0; i < 64; ++i) {
             if (document.getElementById(`cell-${i}`).value === "") {
                 full = false;
                 const number = Math.floor(Math.random() * (19 - 2 + 1)) + 2;
@@ -58,27 +58,13 @@ class EditNumber extends React.Component {
         }
         if (full === false) return;
         let list = [];
-        for (let i = 0; i < 64; ++ i) {
+        for (let i = 0; i < 64; ++i) {
             list.push(document.getElementById(`cell-${i}`).value);
         }
         const result = mapChecking(list, wordNumber);
         if (result === true) {
-            axios.post('https://secustom.herokuapp.com/path', {
-                exam: {
-                    table: list,
-                    word: wordNumber
-                },
-            })
-            .then(() => {
-                alert('Update map successful');
-                this.props.updateData(list, wordNumber);
-                this.props.changeScreen(0);
-            })
-            .catch(() => {
-                alert('Update map failed. You can use the map locally but it is not saved on the server.');
-                this.props.updateData(list, wordNumber);
-                this.props.changeScreen(0);
-            });
+            this.props.updateData(list, wordNumber);
+            this.props.changeScreen(0);
         }
         else alert(result);
     }
@@ -128,7 +114,7 @@ class EditNumber extends React.Component {
                             height: '30px'
                         }}
                         onClick={() => {
-                            for(let i = 0; i < 64; ++ i) {
+                            for (let i = 0; i < 64; ++i) {
                                 document.getElementById(`cell-${i}`).value = "";
                             }
                         }}
@@ -146,6 +132,7 @@ class EditNumber extends React.Component {
                     >Back</button><br />
                 </div>
                 <div className="wrap">
+                    <h5 style={{ textAlign: 'center' }}>1 to 20</h5>
                     {data}
                 </div>
             </div>
