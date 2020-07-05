@@ -3,6 +3,7 @@ import './Alter.scss';
 
 class Wrap extends React.Component {
     componentDidMount() {
+        console.log(this.props.data.data);
         for (let i = 0; i < 64; ++ i) {
             document.getElementById(`cell-${i}`).value = this.props.data.data[i];
         }
@@ -27,7 +28,7 @@ class Wrap extends React.Component {
             count++;
             return (
                 <input
-                    type="number"
+                    type="text"
                     className="square"
                     id={"cell-" + count}
                     key={count}
@@ -70,7 +71,9 @@ class Wrap extends React.Component {
                     >Back</button><br />
                 </div>
                 <div className="wrap">
-                    <h5 style={{ textAlign: 'center' }}>1 to 20</h5>
+                    <h5 style={{ textAlign: 'center' }}>{
+                        ((this.props.data.word[0] === "1") ? "1 to 20" : this.props.data.word)
+                    }</h5>
                     {data}
                 </div>
             </div>
