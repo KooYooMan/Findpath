@@ -34,7 +34,10 @@ class Play extends React.Component {
                                     }}
                                 >
                                     <a
-                                        onClick={() => this.props.changeStage(1)}
+                                        onClick={() => {
+                                            if (this.props.data.length === 0) alert("Please add maps to play");
+                                            else this.props.changeStage(1);
+                                        }}
                                         style={{ width: '100%', fontSize: '50px' }}
                                     >
                                         Play

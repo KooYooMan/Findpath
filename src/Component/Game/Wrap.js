@@ -1,5 +1,6 @@
 import React from 'react';
 import './Game.scss';
+import door from '../Resources/Image/house.png';
 import carrot from '../Resources/Image/carrot.jpg';
 import Up from '../Resources/Image/up.gif';
 import Down from '../Resources/Image/down.gif';
@@ -10,18 +11,25 @@ import Wrong from '../Resources/Sound/Wrong.mp3';
 import gameMusic from '../Resources/Sound/gameMusic.mp3';
 import Volume from '../VolumeSlider/VolumeSlider';
 
+const detectRowRabbit = (data, word) => {
+    for (let i = 0; i < 64; i += 8) {
+        if (data[i] === word[0]) return i / 8;
+    }
+}
+
+const detectRowCarrot = (data, word) => {
+    for (let i = 0; i < 64; i += 8) {
+        if (data[i + 7] === word[word.length - 1]) return i / 8;
+    }
+}
+
 class Wrap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: [],
-            rowRabbit: 0,
-            rowCarrot: 0,
             volume: 30,
         };
         this.changeVolume = this.changeVolume.bind(this);
-        this.detectRowCarrot = this.detectRowCarrot.bind(this);
-        this.detectRowRabbit = this.detectRowRabbit.bind(this);
     }
 
     gameMusic = new Audio(gameMusic);
@@ -35,27 +43,15 @@ class Wrap extends React.Component {
         });
     }
 
-    detectRowRabbit(data) {
-        for (let i = 0; i < 64; i += 8) {
-            if (data[i] === this.props.word[0]) return i / 8;
-        }
-    }
-
-    detectRowCarrot(data) {
-        for (let i = 0; i < 64; i += 8) {
-            if (data[i + 7] === this.props.word[this.props.word.length - 1]) return i / 8;
-        }
-    }
-
     componentDidMount() {
-        const rowRabbit = this.detectRowRabbit(this.props.list);
-        const rowCarrot = this.detectRowCarrot(this.props.list);
-        console.log(rowRabbit, rowCarrot);
-        this.setState({
-            list: this.props.list,
-            rowRabbit: rowRabbit,
-            rowCarrot: rowCarrot,
-        });
+        const rowRabbit = detectRowRabbit(this.props.list, this.props.word);
+        const rowCarrot = detectRowCarrot(this.props.list, this.props.word);
+        var rabbit = document.getElementById("rabbit");
+        rabbit.style.top = `${-520 + rowRabbit * 65}px`;
+        rabbit.style.left = `-119px`;
+        var carrot = document.getElementById("carrot");
+        carrot.style.top = `${-520 + rowCarrot * 65}px`;
+        carrot.style.left = `520px`;
         this.gameMusic.loop = true;
         this.gameMusic.play();
     }
@@ -99,7 +95,9 @@ class Wrap extends React.Component {
                     this.props.updatePoint(100);
                     new Audio(Correct).play();
                     if (passed === this.props.word.length - 1) {
-                        document.querySelectorAll('button').forEach(value => value.disabled = true);
+                        document.querySelectorAll('button').forEach(value => {
+                            value.disabled = true;
+                        });
                         const listCell = this.props.clicked.map(value => ({
                             column: value % 8,
                             row: (value - (value % 8)) / 8,
@@ -142,12 +140,8 @@ class Wrap extends React.Component {
                             }, count * 1000);
                         });
                         setTimeout(() => {
-                            this.props.changeScreen(1);
+                            this.props.nextQuestion();
                         }, (this.props.word.length + 2) * 1000);
-                        setTimeout(() => {
-                            this.props.changeScreen(2);
-                            this.props.updateMaxPoint();
-                        }, (this.props.word.length + 5) * 1000);
                     }
                     return;
                 }
@@ -163,7 +157,7 @@ class Wrap extends React.Component {
 
     render() {
         var count = -1;
-        const data = this.state.list.map(value => {
+        const data = this.props.list.map(value => {
             count++;
             return (
                 <button
@@ -182,7 +176,9 @@ class Wrap extends React.Component {
                 >
                     {value}
                 </button>);
-        })
+        });
+        const rowRabbit = detectRowRabbit(this.props.list, this.props.word);
+        const rowCarrot = detectRowCarrot(this.props.list, this.props.word);
         return (
             <div className="wrap">
                 <h4 style={{textAlign: 'center'}}>
@@ -191,14 +187,12 @@ class Wrap extends React.Component {
                 {data}
                 <img
                     alt=""
-                    src={carrot}
+                    src={(this.props.last === true) ? carrot : door}
                     id="carrot"
                     style={{
                         width: '65px',
                         height: '65px',
                         position: 'relative',
-                        top: `${-520 + this.state.rowCarrot * 65}px`,
-                        left: '520px',
                         transitionProperty: 'top left',
                         transitionDuration: '1s',
                         transitionTimingFunction: 'linear'
@@ -212,8 +206,6 @@ class Wrap extends React.Component {
                         position: 'relative',
                         width: '46px',
                         height: '46px',
-                        top: `${-520 + this.state.rowRabbit * 65}px`,
-                        left: `-119px`,
                         transition: 'left 1s linear, top 1s linear, scale 0s',
                     }}
                 />

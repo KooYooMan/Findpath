@@ -18,7 +18,7 @@ class WrapLetter extends React.Component {
     updateMap() {
         let full = true;
         const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        for (let i = 0; i < 64; ++ i) {
+        for (let i = 0; i < 64; ++i) {
             const valueCell = document.getElementById(`cell-${i}`).value.trim();
             if (valueCell === "") {
                 full = false;
@@ -33,28 +33,14 @@ class WrapLetter extends React.Component {
         }
         if (full === false) return;
         let list = [];
-        for (let i = 0; i < 64; ++ i) {
+        for (let i = 0; i < 64; ++i) {
             const valueCell = document.getElementById(`cell-${i}`).value.trim();
             list.push(valueCell);
         }
         const result = mapChecking(list, this.props.word);
         if (result === true) {
-            axios.post('https://secustom.herokuapp.com/path', {
-                exam: {
-                    table: list,
-                    word: this.props.word
-                },
-            })
-            .then(() => {
-                alert('Update map successful');
-                this.props.updateData(list, this.props.word);
-                this.props.changeScreen(0);
-            })
-            .catch(() => {
-                alert('Update map failed. You can use the map locally but it is not saved on the server.');
-                this.props.updateData(list, this.props.word);
-                this.props.changeScreen(0);
-            });
+            this.props.addMap(list, this.props.word);
+            this.props.changeScreen(0);
         }
         else alert(result);
     }
@@ -64,9 +50,9 @@ class WrapLetter extends React.Component {
         let remainer = this.props.word.length - 8;
         let position = 0;
         let curRow = getRndInterger(0, 7);
-        for (let i = 0; i < 8; ++ i) {
+        for (let i = 0; i < 8; ++i) {
             document.getElementById(`cell-${curRow * 8 + i}`).value = this.props.word[position];
-            position ++;
+            position++;
             if (i === 0 || i === 7) continue;
             const low = Math.max(0, remainer - (6 - i) * 4), high = Math.min(remainer, 4);
             let step = getRndInterger(low, high);
@@ -76,19 +62,19 @@ class WrapLetter extends React.Component {
                 direction = 1 - direction;
             }
             if (direction === 0) {
-                for (let j = 1; j <= step; ++ j) {
-                    curRow --;    
+                for (let j = 1; j <= step; ++j) {
+                    curRow--;
                     document.getElementById(`cell-${curRow * 8 + i}`).value = this.props.word[position];
-                    position ++;
-                    remainer --;
+                    position++;
+                    remainer--;
                 }
             }
             else {
-                for (let j = 1; j <= step; ++ j) {
-                    curRow ++;   
+                for (let j = 1; j <= step; ++j) {
+                    curRow++;
                     document.getElementById(`cell-${curRow * 8 + i}`).value = this.props.word[position];
-                    position ++;
-                    remainer --;
+                    position++;
+                    remainer--;
                 }
             }
         }
@@ -141,7 +127,7 @@ class WrapLetter extends React.Component {
                             height: '30px'
                         }}
                         onClick={() => {
-                            for(let i = 0; i < 64; ++ i) {
+                            for (let i = 0; i < 64; ++i) {
                                 document.getElementById(`cell-${i}`).value = "";
                             }
                         }}
@@ -159,6 +145,7 @@ class WrapLetter extends React.Component {
                     >Back</button><br />
                 </div>
                 <div className="wrap">
+                    <h5 style={{ textAlign: 'center' }}>{this.props.word}</h5>
                     {data}
                 </div>
             </div>
@@ -232,9 +219,9 @@ class EditLetter extends React.Component {
         }
         else {
             return (
-                <WrapLetter 
+                <WrapLetter
                     changeScreen={this.props.changeScreen}
-                    updateData={this.props.updateData}
+                    addMap={this.props.addMap}
                     word={this.state.word}
                 />
             );

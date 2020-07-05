@@ -16,13 +16,16 @@ class Logo extends React.Component {
                     <Play
                         changeScreen={this.props.changeScreen}
                         changeStage={this.props.changeStage}
+                        data={this.props.data}
                     />
                 );
             case 2:
                 return (
                     <Alter
                         changeScreen={this.props.changeScreen}
-                        updateData={this.props.updateData}
+                        data={this.props.data}
+                        addMap={this.props.addMap}
+                        deleteMap={this.props.deleteMap}
                     />
                 );
             case 3:
@@ -109,7 +112,9 @@ class Start extends React.Component {
                     changeScreen={this.changeScreen}
                     changeStage={this.props.changeStage}
                     maxPoint={this.props.maxPoint}
-                    updateData={this.props.updateData}
+                    addMap={this.props.addMap}
+                    deleteMap={this.props.deleteMap}
+                    data={this.props.data}
                 />
                 
             </div>
