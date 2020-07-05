@@ -37,9 +37,7 @@ class Tutorial extends React.Component {
                                     >
                                         <div style={{ height: '50%', width: '100%' }}>Tutorial</div>
                                         <h5 style={{ height: '50%', width: '100%', fontSize: '15px' }}>
-                                            <div id="text-tutorial-start">
-                                                Người chơi sẽ chọn lần lượt các ô có số từ 1 đến 20. Các ô được chọn sẽ được tô màu xanh. Trường hợp đang ở ô số 9, có 2 lựa chọn số 10 cho người chơi đi. Người chơi chọn vào bất cứ ô số 10 nào, đều hiển thị ô đó đúng và cộng điểm. Mỗi bước quay lại trừ đi 100 điểm (Điểm nhỏ nhất là 0) và ô đã quay lại hiển thị nền trắng như ban đầu.
-                                        </div>
+                                            <a href="https://github.com/KooYooMan/Findpath/blob/master/README.md" target="_blank">Link Tutorial</a>
                                         </h5>
                                     </div>
                                     <a onClick={() => this.props.changeScreen(0)}>Back</a>
