@@ -1,10 +1,11 @@
 import React from 'react';
 import './Alter.scss';
+import BackButton from './BackButton';
 
 class Wrap extends React.Component {
     componentDidMount() {
         console.log(this.props.data.data);
-        for (let i = 0; i < 64; ++ i) {
+        for (let i = 0; i < 64; ++i) {
             document.getElementById(`cell-${i}`).value = this.props.data.data[i];
         }
         document.querySelectorAll('.wrap input').forEach(value => {
@@ -99,57 +100,66 @@ class Delete extends React.Component {
     render() {
         if (this.state.screen === 0) {
             return (
-                <div
-                    style={{
-                        paddingTop: '100px',
-                        paddingLeft: '300px'
-                    }}
-                >
-                    <h1>What question do you want to delete?</h1>
-                    <input
-                        type="number"
-                        id="wordLetter"
-                        autoComplete="off"
+                <div>
+                    <BackButton 
+                        backButton={() => this.props.changeScreen(0)}
                         style={{
-                            width: '500px',
-                            height: '30px',
-                            color: 'black'
+                            position: 'relative',
+                            top: '-20px'
                         }}
                     />
-                    <button
-                        className="btn btn-success"
+                    <div
                         style={{
-                            backgroundColor: 'green',
-                            width: '100px',
-                            height: '30px'
+                            paddingTop: '100px',
+                            paddingLeft: '300px'
                         }}
-                        onClick={() => {
-                            if (document.getElementById("wordLetter").value === "") {
-                                alert("Please fill the section");
+                    >
+                        <h1>What question do you want to delete?</h1>
+                        <input
+                            type="number"
+                            id="wordLetter"
+                            autoComplete="off"
+                            style={{
+                                width: '500px',
+                                height: '30px',
+                                color: 'black'
+                            }}
+                        />
+                        <button
+                            className="btn btn-success"
+                            style={{
+                                backgroundColor: 'green',
+                                width: '100px',
+                                height: '30px'
+                            }}
+                            onClick={() => {
+                                if (document.getElementById("wordLetter").value === "") {
+                                    alert("Please fill the section");
+                                    return;
+                                }
+                                const position = parseInt(document.getElementById("wordLetter").value);
+                                if (position >= 1 && position <= this.props.data.length) {
+                                    this.setState({
+                                        screen: 1,
+                                        question: position
+                                    });
+                                    return;
+                                }
+                                alert('Invalid question');
                                 return;
-                            }
-                            const position = parseInt(document.getElementById("wordLetter").value);
-                            if (position >= 1 && position <= this.props.data.length) {
-                                this.setState({
-                                    screen: 1,
-                                    question: position
-                                });
-                                return ;
-                            }
-                            alert('Invalid question');
-                            return;
-                        }}
-                    >Confirm</button>
+                            }}
+                        >Confirm</button>
+                    </div>
                 </div>
             );
         }
         else {
             return (
-                <Wrap 
-                    data = {this.props.data[this.state.question - 1]}
-                    question = {this.state.question}
-                    changeScreen = {this.props.changeScreen}
-                    deleteMap = {this.props.deleteMap}
+                <Wrap
+                    data={this.props.data[this.state.question - 1]}
+                    question={this.state.question}
+                    changeScreen={this.props.changeScreen}
+                    deleteMap={this.props.deleteMap}
                 />
             );
         }

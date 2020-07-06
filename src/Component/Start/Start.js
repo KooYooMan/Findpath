@@ -104,6 +104,7 @@ class Start extends React.Component {
                     style={{
                         position: 'absolute',
                         top: '20px',
+                        right: '10px',
                         height: '0px'
                     }}
                 />

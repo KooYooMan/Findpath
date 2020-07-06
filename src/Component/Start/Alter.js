@@ -4,33 +4,43 @@ import { Spring } from 'react-spring/renderprops';
 import EditNumber from './EditNumber';
 import EditLetter from './EditLetter';
 import Delete from './Delete';
+import BackButton from './BackButton';
 
 class Option extends React.Component {
     render() {
         return (
-            <div id="dot">
-                <button onClick={() => {
-                    if (this.props.data.length === 0) {
-                        alert('There is no questions to delete!');
-                        return;
-                    }
-                    this.props.changeScreen(5);
-                }}>
-                    <span className="dot">
-                        <div>Delete Question</div>
-                    </span>
-                </button>
-                <button onClick={() => {
-                    if (this.props.data.length >= 3) {
-                        alert("Can't create more than 3 questions!");
-                        return;
-                    }
-                    this.props.changeScreen(4);
-                }}>
-                    <span className="dot">
-                        <div>Add Question</div>
-                    </span>
-                </button>
+            <div>
+                <BackButton
+                    backButton={() => this.props.changeScreen(0)}
+                    style={{
+                        position: 'relative',
+                        top: '-20px',
+                    }}
+                />
+                <div id="dot">
+                    <button onClick={() => {
+                        if (this.props.data.length === 0) {
+                            alert('There is no questions to delete!');
+                            return;
+                        }
+                        this.props.changeScreen(5);
+                    }}>
+                        <span className="dot">
+                            <div>Delete Question</div>
+                        </span>
+                    </button>
+                    <button onClick={() => {
+                        if (this.props.data.length >= 3) {
+                            alert("Can't create more than 3 questions!");
+                            return;
+                        }
+                        this.props.changeScreen(4);
+                    }}>
+                        <span className="dot">
+                            <div>Add Question</div>
+                        </span>
+                    </button>
+                </div>
             </div>
         );
     }
@@ -39,17 +49,26 @@ class Option extends React.Component {
 class Edit extends React.Component {
     render() {
         return (
-            <div id="dot">
-                <button onClick={() => this.props.changeScreen(2)}>
-                    <span className="dot">
-                        <div>Letter</div>
-                    </span>
-                </button>
-                <button onClick={() => this.props.changeScreen(3)}>
-                    <span className="dot">
-                        <div>Number</div>
-                    </span>
-                </button>
+            <div>
+                <BackButton
+                    backButton={() => this.props.changeScreen(0)}
+                    style={{
+                        position: 'relative',
+                        top: '-20px',
+                    }}
+                />
+                <div id="dot">
+                    <button onClick={() => this.props.changeScreen(2)}>
+                        <span className="dot">
+                            <div>Letter</div>
+                        </span>
+                    </button>
+                    <button onClick={() => this.props.changeScreen(3)}>
+                        <span className="dot">
+                            <div>Number</div>
+                        </span>
+                    </button>
+                </div>
             </div>
         );
     }
@@ -158,7 +177,7 @@ class Alter extends React.Component {
                 )
             case 5:
                 return (
-                    <Delete 
+                    <Delete
                         changeScreen={this.changeScreen}
                         deleteMap={this.props.deleteMap}
                         data={this.props.data}

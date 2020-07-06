@@ -1,7 +1,7 @@
 import React from 'react';
 import './Alter.scss';
-import axios from 'axios';
 import mapChecking from '../Resources/Map/mapChecking';
+import BackButton from './BackButton';
 
 const toInputUppercase = e => {
     e.target.value = ("" + e.target.value).toUpperCase();
@@ -171,49 +171,58 @@ class EditLetter extends React.Component {
     render() {
         if (this.state.screen === 0) {
             return (
-                <div
-                    style={{
-                        paddingTop: '100px',
-                        paddingLeft: '300px'
-                    }}
-                >
-                    <h1>Choose the word you wana play</h1>
-                    <input
-                        type="text"
-                        onInput={toInputUppercase}
-                        id="wordLetter"
-                        autoComplete="off"
+                <div>
+                    <BackButton 
+                        backButton={() => this.props.changeScreen(0)}
                         style={{
-                            width: '500px',
-                            height: '30px',
-                            color: 'black'
+                            position: 'relative',
+                            top: '-20px'
                         }}
                     />
-                    <button
-                        className="btn btn-success"
+                    <div
                         style={{
-                            backgroundColor: 'green',
-                            width: '100px',
-                            height: '30px'
+                            paddingTop: '100px',
+                            paddingLeft: '300px'
                         }}
-                        onClick={() => {
-                            const wordLetter = document.getElementById("wordLetter").value.trim();
-                            if (wordLetter.length < 8 || wordLetter.length > 20) {
-                                alert('The word must contains 8-20 letters');
-                                return;
-                            }
-                            for (let i = 0; i < wordLetter.length; ++i) {
-                                if (wordLetter[i] < 'A' || wordLetter[i] > 'Z') {
-                                    alert("The word must contains uppercase alphabet letters");
+                    >
+                        <h1>Choose the word you wana play</h1>
+                        <input
+                            type="text"
+                            onInput={toInputUppercase}
+                            id="wordLetter"
+                            autoComplete="off"
+                            style={{
+                                width: '500px',
+                                height: '30px',
+                                color: 'black'
+                            }}
+                        />
+                        <button
+                            className="btn btn-success"
+                            style={{
+                                backgroundColor: 'green',
+                                width: '100px',
+                                height: '30px'
+                            }}
+                            onClick={() => {
+                                const wordLetter = document.getElementById("wordLetter").value.trim();
+                                if (wordLetter.length < 8 || wordLetter.length > 20) {
+                                    alert('The word must contains 8-20 letters');
                                     return;
                                 }
-                            }
-                            this.setState({
-                                screen: 1,
-                                word: wordLetter,
-                            })
-                        }}
-                    >Confirm</button>
+                                for (let i = 0; i < wordLetter.length; ++i) {
+                                    if (wordLetter[i] < 'A' || wordLetter[i] > 'Z') {
+                                        alert("The word must contains uppercase alphabet letters");
+                                        return;
+                                    }
+                                }
+                                this.setState({
+                                    screen: 1,
+                                    word: wordLetter,
+                                })
+                            }}
+                        >Confirm</button>
+                    </div>
                 </div>
             );
         }
