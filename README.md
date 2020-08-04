@@ -1,4 +1,4 @@
-# Báo cáo bài tập lớn môn Công Nghệ Phần Mềm: Game Find-Path
+# Game Find-Path
 ## 1. Về cách chơi Game
 [Link game](https://kooyooman.github.io/Findpath/)
 ### 1.1. Màn hình chính
